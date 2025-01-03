@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入Vue 2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p v-for="(value,key) in item" :key="key">
+      {{ value }}
+    </p>
+    <button @click="addProperty">动态添加新属性</button>
+    <button @click="addPropertySet">Set动态添加新属性</button>
+    <button @click="addPropertyAssign">Assign动态添加新属性</button>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          item: {
+            oldProperty: '旧属性'
+          }
+        }
+      },
+      methods: {
+        addProperty() {
+          this.item.newProperty = "新属性"  // 为items添加新属性
+          console.log(this.item)  // 输出带有newProperty的items
+        },
+
+        // 解决方案
+        addPropertySet() {
+          Vue.set(this.item, 'newPropertySet', '新属性Set')
+        },
+        addPropertyAssign() {
+          this.item = Object.assign({}, this.item, { 'newPropertyAssign': '新属性Assign' })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
