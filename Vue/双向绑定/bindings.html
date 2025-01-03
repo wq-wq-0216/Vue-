@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <div id="app">
+    <span>打工人: {{name}}</span>
+    <input type="text" v-model="name" />
+    <span>工资：{{more.salary}}</span>
+    <input type="text" v-model="more.salary" />
+    <h6>
+      感谢蛋老师的知识分析
+      <a href="https://www.bilibili.com/video/BV1934y1a7MN" target="_blank">原视频</a>
+    </h6>
+  </div>
+</body>
+
+</html>
+
+<script src="./bindings.js"></script>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      name: 'CJH',
+      more: {
+        salary: 20000
+      }
+    }
+  })
+  console.log("vm", vm)
+
+  let obj = {}
+  let val = ''
+  Object.defineProperty(obj, 'name', {
+    get: function () {
+      console.log('我被获取了')
+      return val;
+    },
+    set: function (newVal) {
+      val = newVal
+      console.log("我被设置了")
+    }
+  })
+  obj.name = '王楚钦'
+  val = obj.name
+</script>

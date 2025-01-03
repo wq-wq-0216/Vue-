@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 2 LifeCycle</title>
+  <!-- 引入Vue 2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="点击" @click="message = 'no'">
+    <h3 id="h3">{{ message }}</h3>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'ok!'
+      },
+      methods: {
+
+      },
+      beforeCreate() {
+        console.log("message beforeCreate", this.message)
+      },
+      created() {
+        console.log("message created", this.message)
+      },
+      beforeMount() {
+        console.log("app beforeMount", document.getElementById('h3').innerText)
+      },
+      mounted() {
+        console.log("app mounted", document.getElementById('h3').innerText)
+      },
+      beforeUpdate() {
+        console.log("界面上元素的内容 beforeUpdate", document.getElementById('h3').innerText)
+        console.log("data中的内容", this.message)
+      },
+      updated() {
+        console.log("界面上元素的内容 updated", document.getElementById('h3').innerText)
+        console.log("data中的内容", this.message)
+      },
+    })
+
+  </script>
+</body>
+
+</html>
