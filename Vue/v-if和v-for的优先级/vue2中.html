@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入Vue 2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <!-- vue2中，v-for优先级高于v-if -->
+      <li v-for="item in todoList" v-if="!item.done" :class="{todo: !item.done}" :key="item.id">
+        <span>{{item.task}}</span>
+      </li>
+    </ul>
+
+    <ul>
+      <li v-for="item in todoList" v-if="item.done" :class="{finished: item.done}" :key="item.id">
+        <span>{{item.task}}</span>
+      </li>
+    </ul>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          todoList: [
+            {
+              id: 0,
+              task: '吃饭',
+              done: true,
+            },
+            {
+              id: 1,
+              task: '睡觉',
+              done: false,
+            },
+            {
+              id: 2,
+              task: '洗澡',
+              done: true,
+            },
+          ]
+        }
+      },
+    })
+  </script>
+</body>
+<style>
+  .todo {
+    color: black;
+  }
+
+  .finished {
+    color: blue;
+  }
+</style>
+
+</html>

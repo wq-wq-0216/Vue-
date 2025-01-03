@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入Vue 3 CDN -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--  最佳实践  -->
+    <ul class="todo-list">
+      <li v-for="item in todos" class="todo" :key="item.id">
+        <span>{{item.task}}</span>
+      </li>
+    </ul>
+
+    <ul v-if="showFinished">
+      <li v-for="item in finished" :key="item.id" class="finished">
+        <span>{{item.task}}</span>
+      </li>
+    </ul>
+
+    <p>
+      show finished?
+      <input type="checkbox" v-model="showFinished" />
+      {{showFinished ? 'yes' : 'no'}}
+    </p>
+  </div>
+
+  <script>
+    const list = [
+      {
+        id: 0,
+        task: '吃饭',
+        done: true,
+      },
+      {
+        id: 1,
+        task: '睡觉',
+        done: false,
+      },
+      {
+        id: 2,
+        task: '洗澡',
+        done: true,
+      },
+    ]
+    Vue.createApp({
+      data() {
+        return {
+          todoList: list
+        }
+      },
+      computed: {
+        finished() {
+          return this.todoList.filter(t => t.done);
+        },
+        todos() {
+          return this.todoList.filter(t => !t.done);
+        },
+      },
+
+    }).mount('#app')
+  </script>
+
+</body>
+<style>
+  .todo {
+    color: black;
+  }
+
+  .finished {
+    color: blue;
+  }
+</style>
+
+</html>
