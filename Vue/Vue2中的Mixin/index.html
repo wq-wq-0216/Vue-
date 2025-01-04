@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入Vue 2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="clickMe">点击我</button>
+  </div>
+
+  <script type="module">
+    export const mixins = {
+      data() {
+        return {
+          msg: "我是小猪课堂",
+        };
+      },
+      computed: {},
+      created() {
+        console.log("我是mixin中的created生命周期函数");
+      },
+      mounted() {
+        console.log("我是mixin中的mounted生命周期函数");
+      },
+      methods: {
+        clickMe() {
+          console.log("我是mixin中的点击事件");
+        },
+      },
+    };
+
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+
+        }
+      },
+      mixins: [mixins],
+      created() {
+        console.log("组件调用minxi数据", this.msg);
+      },
+      mounted() {
+        console.log("我是组件的mounted生命周期函数")
+      },
+      // 方法冲突，调用组件的方法
+      methods: {
+        clickMe() {
+          console.log("我是组件中的点击事件");
+        },
+      },
+
+    })
+  </script>
+</body>
+
+</html>
