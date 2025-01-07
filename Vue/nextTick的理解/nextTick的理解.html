@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入Vue 2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">{{message}}</div>
+</body>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      message: '原始值'
+    }
+  })
+
+  // 这里不能直接使用 this.message，因为 this 指向的是 window，而不是 Vue 实例
+  vm.message = '修改后的值1'
+  vm.message = '修改后的值2'
+  vm.message = '修改后的值3'
+
+  console.log(vm.$el.textContent) // 输出: '原始值'
+
+  // 使用 vm.$nextTick 来确保 DOM 更新后执行的操作
+  vm.$nextTick(function () {
+    console.log(vm.$el.textContent) // 输出: '修改后的值3'
+  })
+
+</script>
+
+</html>
